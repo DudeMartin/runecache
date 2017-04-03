@@ -60,6 +60,12 @@ public class RuneBuffer {
         offset += destination.length;
     }
 
+    public String getString() {
+        StringBuilder builder = new StringBuilder();
+        for (char c; (c = (char) getByte()) != '\0'; builder.append(c));
+        return builder.toString();
+    }
+
     public void xteaDecipher(int[] key, int start, int end) {
         int delta = 0x9E3779B9;
         int mark = offset;
