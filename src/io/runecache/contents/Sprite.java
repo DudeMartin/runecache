@@ -1,11 +1,14 @@
 package io.runecache.contents;
 
-import io.runecache.*;
+import io.runecache.Cache;
+import io.runecache.CacheConstants;
+import io.runecache.ReferenceTable;
+import io.runecache.RuneBuffer;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class Sprite {
+public final class Sprite {
 
     public static Sprite get(Cache cache, int spriteId) throws IOException {
         return new Sprite(cache.readUncompressedFile(CacheConstants.INDEX_SPRITES, spriteId));
@@ -21,8 +24,8 @@ public class Sprite {
         return sprites;
     }
 
-    private static final int FLAG_VERTICAL = 0x1;
-    private static final int FLAG_ALPHA = 0x2;
+    private static final int FLAG_VERTICAL = 1;
+    private static final int FLAG_ALPHA = 1 << 1;
 
     public BufferedImage[] frames;
     public int width;
@@ -81,19 +84,16 @@ public class Sprite {
                 }
             }
             if ((flags & FLAG_ALPHA) != 0) {
-                int alpha;
                 if ((flags & FLAG_VERTICAL) != 0) {
                     for (x = 0; x < frameWidth; x++) {
                         for (y = 0; y < frameHeight; y++) {
-                            alpha = data.getUnsignedByte();
-                            frameImage.setRGB(x + frameX, y + frameY, alpha << 24 | palette[paletteIndices[x][y]]);
+                            frameImage.setRGB(x + frameX, y + frameY, data.getUnsignedByte() << 24 | palette[paletteIndices[x][y]]);
                         }
                     }
                 } else {
                     for (y = 0; y < frameHeight; y++) {
                         for (x = 0; x < frameWidth; x++) {
-                            alpha = data.getUnsignedByte();
-                            frameImage.setRGB(x + frameX, y + frameY, alpha << 24 | palette[paletteIndices[x][y]]);
+                            frameImage.setRGB(x + frameX, y + frameY, data.getUnsignedByte() << 24 | palette[paletteIndices[x][y]]);
                         }
                     }
                 }

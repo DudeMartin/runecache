@@ -5,7 +5,7 @@ import io.runecache.*;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class ItemDefinition {
+public final class ItemDefinition {
 
     public static ItemDefinition get(Cache cache, int itemId) throws IOException {
         ReferenceTable configurationsTable = new ReferenceTable(cache.readUncompressedFile(CacheConstants.INDEX_META, CacheConstants.INDEX_CONFIGURATIONS));
