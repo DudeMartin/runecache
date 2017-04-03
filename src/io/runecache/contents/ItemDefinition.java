@@ -303,9 +303,9 @@ public class ItemDefinition {
         builder.append("\n\tnoteTemplateId: ");
         builder.append(noteTemplateId);
         builder.append("\n\tstackVariantId: ");
-        builder.append(java.util.Arrays.toString(stackVariantId));
+        builder.append(Arrays.toString(stackVariantId));
         builder.append("\n\tstackVariantSize: ");
-        builder.append(java.util.Arrays.toString(stackVariantSize));
+        builder.append(Arrays.toString(stackVariantSize));
         builder.append("\n\tmodelScaleX: ");
         builder.append(modelScaleX);
         builder.append("\n\tmodelScaleY: ");

@@ -78,6 +78,10 @@ public class ReferenceTable {
         }
     }
 
+    public int getEntryCount() {
+        return ids.length;
+    }
+
     public int getGroupId(int entry) {
         return ids[entry];
     }

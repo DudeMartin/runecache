@@ -14,7 +14,8 @@ public class Group {
         int i;
         int j;
         int size;
-        for (data.offset -= 1 + chunkCount * childCount * 4, i = 0, size = 0; i < chunkCount; i++, size = 0) {
+        data.offset -= 1 + chunkCount * childCount * 4;
+        for (i = 0, size = 0; i < chunkCount; i++, size = 0) {
             for (j = 0; j < childCount; j++) {
                 size += data.getInteger();
                 chunkSizes[i][j] = size;
@@ -25,7 +26,9 @@ public class Group {
         for (i = 0; i < childCount; i++) {
             childData[i] = new byte[childArray[i]];
         }
-        for (data.offset = 0, Arrays.fill(childArray, 0), i = 0; i < chunkCount; i++) {
+        data.offset = 0;
+        Arrays.fill(childArray, 0);
+        for (i = 0; i < chunkCount; i++) {
             for (j = 0; j < childCount; childArray[j] += size, j++) {
                 size = chunkSizes[i][j];
                 byte[] chunkData = new byte[size];
