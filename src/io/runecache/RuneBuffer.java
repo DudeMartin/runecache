@@ -18,10 +18,11 @@ public class RuneBuffer {
     }
 
     public void putInteger(int value) {
-        bytes[offset++] = (byte) (value >> 24);
-        bytes[offset++] = (byte) (value >> 16);
-        bytes[offset++] = (byte) (value >> 8);
-        bytes[offset++] = (byte) value;
+        bytes[offset] = (byte) (value >>> 24);
+        bytes[offset + 1] = (byte) (value >>> 16);
+        bytes[offset + 2] = (byte) (value >>> 8);
+        bytes[offset + 3] = (byte) value;
+        offset += 4;
     }
 
     public int getByte() {
@@ -33,18 +34,21 @@ public class RuneBuffer {
     }
 
     public int getShort() {
-        return ((bytes[offset++] & 0xFF) << 8) | (bytes[offset++] & 0xFF);
+        offset += 2;
+        return ((bytes[offset - 2] & 0xFF) << 8) | (bytes[offset - 1] & 0xFF);
     }
 
     public int getTriplet() {
-        return ((bytes[offset++] & 0xFF) << 16) | ((bytes[offset++] & 0xFF) << 8) | (bytes[offset++] & 0xFF);
+        offset += 3;
+        return ((bytes[offset - 3] & 0xFF) << 16) | ((bytes[offset - 2] & 0xFF) << 8) | (bytes[offset - 1] & 0xFF);
     }
 
     public int getInteger() {
-        return ((bytes[offset++] & 0xFF) << 24)
-                | ((bytes[offset++] & 0xFF) << 16)
-                | ((bytes[offset++] & 0xFF) << 8)
-                | (bytes[offset++] & 0xFF);
+        offset += 4;
+        return ((bytes[offset - 4] & 0xFF) << 24)
+                | ((bytes[offset - 3] & 0xFF) << 16)
+                | ((bytes[offset - 2] & 0xFF) << 8)
+                | (bytes[offset - 1] & 0xFF);
     }
 
     public int getSmartInteger() {
@@ -52,7 +56,7 @@ public class RuneBuffer {
     }
 
     public int getUnsignedSmartShort() {
-        return ((bytes[offset] & 0xff) < 128) ? getUnsignedByte() : getShort() - 32768;
+        return ((bytes[offset] & 0xFF) < 128) ? getUnsignedByte() : getShort() - 32768;
     }
 
     public void getBytes(byte[] destination) {
@@ -61,13 +65,13 @@ public class RuneBuffer {
     }
 
     public String getString() {
-        StringBuilder builder = new StringBuilder();
-        for (char c; (c = (char) getByte()) != '\0'; builder.append(c));
-        return builder.toString();
+        int start = offset;
+        while (bytes[offset++] != '\0');
+        return new String(bytes, start, offset - start - 1);
     }
 
     public void xteaDecipher(int[] key, int start, int end) {
-        int delta = 0x9E3779B9;
+        final int delta = 0x9E3779B9;
         int mark = offset;
         offset = start;
         for (int i = 0, pairs = (end - start) / 8; i < pairs; i++) {
