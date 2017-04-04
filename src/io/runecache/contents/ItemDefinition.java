@@ -1,9 +1,9 @@
 package io.runecache.contents;
 
 import io.runecache.*;
+import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 public final class ItemDefinition {
 
@@ -235,90 +235,53 @@ public final class ItemDefinition {
         }
     }
 
+    public JSONObject json() {
+        JSONObject result = new JSONObject();
+        result.put("inventoryModel", inventoryModel);
+        result.put("name", name);
+        result.put("rotationLength", rotationLength);
+        result.put("rotateX", rotateX);
+        result.put("rotateY", rotateY);
+        result.put("translateX", translateX);
+        result.put("translateY", translateY);
+        result.put("stackable", stackable);
+        result.put("cost", cost);
+        result.put("members", members);
+        result.put("modelMale1", modelMale1);
+        result.put("modelMaleTranslateY", modelMaleTranslateY);
+        result.put("modelMale2", modelMale2);
+        result.put("modelFemale1", modelFemale1);
+        result.put("modelFemaleTranslateY", modelFemaleTranslateY);
+        result.put("modelFemale2", modelFemale2);
+        result.put("groundActions", groundActions);
+        result.put("interfaceOptions", interfaceOptions);
+        result.put("modelRecolorFind", modelRecolorFind);
+        result.put("modelRecolorReplace", modelRecolorReplace);
+        result.put("textureFind", textureFind);
+        result.put("textureReplace", textureReplace);
+        result.put("tradable", tradable);
+        result.put("modelMale3", modelMale3);
+        result.put("modelFemale3", modelFemale3);
+        result.put("maleHeadModel1", maleHeadModel1);
+        result.put("femaleHeadModel1", femaleHeadModel1);
+        result.put("maleHeadModel2", maleHeadModel2);
+        result.put("femaleHeadModel2", femaleHeadModel2);
+        result.put("rotateZ", rotateZ);
+        result.put("noteItemId", noteItemId);
+        result.put("noteTemplateId", noteTemplateId);
+        result.put("stackVariantId", stackVariantId);
+        result.put("stackVariantSize", stackVariantSize);
+        result.put("modelScaleX", modelScaleX);
+        result.put("modelScaleY", modelScaleY);
+        result.put("modelScaleZ", modelScaleZ);
+        result.put("lightIntensity", lightIntensity);
+        result.put("lightMagnitude", lightMagnitude);
+        result.put("teamNumber", teamNumber);
+        return result;
+    }
+
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("[ inventoryModel: ");
-        builder.append(inventoryModel);
-        builder.append("\n\tname: ");
-        builder.append(name);
-        builder.append("\n\trotationLength: ");
-        builder.append(rotationLength);
-        builder.append("\n\trotateX: ");
-        builder.append(rotateX);
-        builder.append("\n\trotateY: ");
-        builder.append(rotateY);
-        builder.append("\n\ttranslateX: ");
-        builder.append(translateX);
-        builder.append("\n\ttranslateY: ");
-        builder.append(translateY);
-        builder.append("\n\tstackable: ");
-        builder.append(stackable);
-        builder.append("\n\tcost: ");
-        builder.append(cost);
-        builder.append("\n\tmembers: ");
-        builder.append(members);
-        builder.append("\n\tmodelMale1: ");
-        builder.append(modelMale1);
-        builder.append("\n\tmodelMaleTranslateY: ");
-        builder.append(modelMaleTranslateY);
-        builder.append("\n\tmodelMale2: ");
-        builder.append(modelMale2);
-        builder.append("\n\tmodelFemale1: ");
-        builder.append(modelFemale1);
-        builder.append("\n\tmodelFemaleTranslateY: ");
-        builder.append(modelFemaleTranslateY);
-        builder.append("\n\tmodelFemale2: ");
-        builder.append(modelFemale2);
-        builder.append("\n\tgroundActions: ");
-        builder.append(Arrays.toString(groundActions));
-        builder.append("\n\tinterfaceOptions: ");
-        builder.append(Arrays.toString(interfaceOptions));
-        builder.append("\n\tmodelRecolorFind: ");
-        builder.append(Arrays.toString(modelRecolorFind));
-        builder.append("\n\tmodelRecolorReplace: ");
-        builder.append(Arrays.toString(modelRecolorReplace));
-        builder.append("\n\ttextureFind: ");
-        builder.append(Arrays.toString(textureFind));
-        builder.append("\n\ttextureReplace: ");
-        builder.append(Arrays.toString(textureReplace));
-        builder.append("\n\ttradable: ");
-        builder.append(tradable);
-        builder.append("\n\tmodelMale3: ");
-        builder.append(modelMale3);
-        builder.append("\n\tmodelFemale3: ");
-        builder.append(modelFemale3);
-        builder.append("\n\tmaleHeadModel1: ");
-        builder.append(maleHeadModel1);
-        builder.append("\n\tfemaleHeadModel1: ");
-        builder.append(femaleHeadModel1);
-        builder.append("\n\tmaleHeadModel2: ");
-        builder.append(maleHeadModel2);
-        builder.append("\n\tfemaleHeadModel2: ");
-        builder.append(femaleHeadModel2);
-        builder.append("\n\trotateZ: ");
-        builder.append(rotateZ);
-        builder.append("\n\tnoteItemId: ");
-        builder.append(noteItemId);
-        builder.append("\n\tnoteTemplateId: ");
-        builder.append(noteTemplateId);
-        builder.append("\n\tstackVariantId: ");
-        builder.append(Arrays.toString(stackVariantId));
-        builder.append("\n\tstackVariantSize: ");
-        builder.append(Arrays.toString(stackVariantSize));
-        builder.append("\n\tmodelScaleX: ");
-        builder.append(modelScaleX);
-        builder.append("\n\tmodelScaleY: ");
-        builder.append(modelScaleY);
-        builder.append("\n\tmodelScaleZ: ");
-        builder.append(modelScaleZ);
-        builder.append("\n\tlightIntensity: ");
-        builder.append(lightIntensity);
-        builder.append("\n\tlightMagnitude: ");
-        builder.append(lightMagnitude);
-        builder.append("\n\tteamNumber: ");
-        builder.append(teamNumber);
-        builder.append(" ]");
-        return builder.toString();
+        return json().toString();
     }
 }

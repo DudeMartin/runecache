@@ -20,3 +20,7 @@ public class ExampleUsage {
     }
 }
 ```
+
+### Dependencies
+* [Apache Commons Compress](https://commons.apache.org/proper/commons-compress/dependency-info.html)
+* [org.json](https://mvnrepository.com/artifact/org.json/json)
